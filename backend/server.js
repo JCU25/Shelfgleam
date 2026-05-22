@@ -14,4 +14,5 @@ const server = http.createServer(app);
 
 server.listen(port, () => {
 	console.log(`Server is running on port ${port}`);
+	console.log(`API endpoint: http://localhost:${port}/v1`);
 });
