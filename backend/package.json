@@ -3,6 +3,8 @@
 	"version": "1.0.0",
 	"main": "server.js",
 	"scripts": {
+		"db:migrate": "npx dbmate --migrations-dir ./db/migrations up",
+		"db:rollback": "npx dbmate --migrations-dir ./db/migrations down",
 		"dev": "echo \"Running development server\" && nodemon server.js",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -11,6 +13,7 @@
 	"license": "ISC",
 	"description": "",
 	"devDependencies": {
+		"dbmate": "^2.33.0",
 		"nodemon": "^3.1.14"
 	},
 	"dependencies": {
