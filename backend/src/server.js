@@ -3,7 +3,6 @@ require("dotenv").config({
 	override: true,
 });
 
-console.log(process.env.DATABASE_URL);
 const express = require("express");
 const http = require("http");
 const app = express();
