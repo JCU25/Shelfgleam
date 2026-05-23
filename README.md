@@ -17,11 +17,11 @@ npm install
 
 ## Backend
 
-### ENVIRONMENT VARIABLES:
+### Configure Environment Variables:
 
 Create a `.env` file inside the /backend folder, and configure the information using [env.example](/backend/.env.example) as reference.
 
-### Migrations
+### Setup Database Migrations
 
 This project uses dbmate for migrations.
 
