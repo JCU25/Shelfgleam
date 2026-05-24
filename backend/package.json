@@ -1,11 +1,12 @@
 {
 	"name": "shelfgleam-backend",
 	"version": "1.0.0",
-	"main": "server.js",
+	"type": "module",
+	"main": "server.ts",
 	"scripts": {
 		"db:migrate": "npx dbmate --migrations-dir ./src/db/migrations up",
 		"db:rollback": "npx dbmate --migrations-dir ./src/db/migrations down",
-		"dev": "echo \"Running development server\" && nodemon src/server.js",
+		"dev": "echo \"Running development server\" && nodemon --exec node --loader ts-node/esm src/server.ts --trace-deprecation",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"keywords": [],
@@ -13,12 +14,19 @@
 	"license": "ISC",
 	"description": "",
 	"devDependencies": {
+		"@types/express": "^5.0.6",
+		"@types/node": "^25.9.1",
+		"@types/swagger-ui-express": "^4.1.8",
 		"dbmate": "^2.33.0",
-		"nodemon": "^3.1.14"
+		"nodemon": "^3.1.14",
+		"swagger-ui-express": "^5.0.1",
+		"ts-node": "^10.9.2",
+		"typescript": "^6.0.3"
 	},
 	"dependencies": {
 		"dotenv": "^17.4.2",
 		"express": "^5.2.1",
-		"jsonwebtoken": "^9.0.3"
+		"jsonwebtoken": "^9.0.3",
+		"kysely": "^0.29.2"
 	}
 }
