@@ -72,7 +72,7 @@ CREATE TABLE public.users (
     id character varying(36) NOT NULL,
     username character varying(255) NOT NULL,
     email character varying(255) NOT NULL,
-    display_name character varying(255) NOT NULL,
+    display_name character varying(255),
     password_hash character varying(255) NOT NULL,
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now()
