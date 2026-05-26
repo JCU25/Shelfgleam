@@ -6,7 +6,12 @@ const signup = async (req: Request, res: Response) => {
 		const { username, email, password, displayName } = req.body;
 		if (!(username && email && password))
 			throw new Error("Username, email and password are required");
-		const user = await createUser(username, email, password, displayName);
+		const user = await createUser({
+			username,
+			email,
+			password,
+			displayName,
+		});
 		return res.status(201).json({
 			user,
 			message: "Successfully created User",

@@ -6,21 +6,27 @@ dotenv.config({
 	path: ".env",
 });
 
+interface CreateUserParams {
+	username: string;
+	email: string;
+	password: string;
+	displayName?: string;
+}
+
 /**
- * Create a user in database
+ * Create a user record in the database
  * @param username
  * @param email
  * @param password
  * @param displayName
  * @returns User.id, User.email, User.username, User.display_name
- *
  */
-export const createUser = async (
-	username: string,
-	email: string,
-	password: string,
-	displayName: string,
-) => {
+export const createUser = async ({
+	username,
+	email,
+	password,
+	displayName,
+}: CreateUserParams) => {
 	const result = await db
 		.insertInto("users")
 		.values({
@@ -35,5 +41,3 @@ export const createUser = async (
 
 	return result;
 };
-
-export default { createUser };
