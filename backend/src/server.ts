@@ -1,5 +1,5 @@
 import swaggerUi from "swagger-ui-express";
-// import swaggerDocument from "../../swagger.js" with { type: "json" };
+import chalk from "chalk";
 import dotenv from "dotenv";
 import express from "express";
 import http from "http";
@@ -21,7 +21,11 @@ app.use("/api", routes);
 const server = http.createServer(app);
 
 server.listen(port, () => {
-	console.log(`Server is running on port ${port}`);
-	console.log(`API documentation available at http://localhost:${port}/docs`);
-	console.log(`API endpoint: http://localhost:${port}/api/v1`);
+	console.log(chalk.green(`Server is running on port ${port}`));
+	console.log(
+		chalk.green(
+			`API documentation available at http://localhost:${port}/docs`,
+		),
+	);
+	console.log(chalk.green(`API endpoint: http://localhost:${port}/api/v1`));
 });
