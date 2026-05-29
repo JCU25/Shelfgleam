@@ -32,6 +32,33 @@ const router = Router();
  *         description: Internal server error
  */
 router.post("/signup", userController.signup);
+
+/**
+ * @swagger
+ * /api/v1/users/login:
+ *   post:
+ *     summary: Login user
+ *     tags: [User]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required: [username, email, password]
+ *             properties:
+ *               username:
+ *                 type: string
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Logged in successfully
+ *       500:
+ *         description: Login Failed
+ */
 router.post("/login", userController.login);
 router.post("/logout", userController.logout);
 

@@ -1,5 +1,5 @@
 import type { Request, Response } from "express";
-import { createUser } from "../services/userServices.js";
+import { createUser, userLogin } from "../services/userServices.js";
 
 const signup = async (req: Request, res: Response) => {
 	try {
@@ -25,7 +25,42 @@ const signup = async (req: Request, res: Response) => {
 	}
 };
 
-const login = async (req: Request, res: Response) => {};
+const login = async (req: Request, res: Response) => {
+	try {
+		const { username, password, email } = req.body;
+
+		if (!(username || email) && !password) {
+			throw new Error("Please enter your email/username and password.");
+		}
+
+		let result;
+
+		if (username) {
+			// call user service login
+			result = await userLogin({
+				username,
+				password,
+			});
+		} else if (email) {
+			result = await userLogin({
+				email,
+				password,
+			});
+		}
+
+		// todo: create user Session
+
+		return res.status(200).json({
+			result,
+			message: "Log in successful.",
+		});
+	} catch (error) {
+		console.log(error);
+		return res.json({
+			message: "Login failed. Please verify your credentials.",
+		});
+	}
+};
 
 const logout = async (req: Request, res: Response) => {};
 
