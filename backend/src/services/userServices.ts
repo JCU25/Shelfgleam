@@ -39,5 +39,6 @@ export const createUser = async ({
 		.returning(["id", "email", "username", "display_name"])
 		.executeTakeFirst();
 
+	console.log(`Created user`, result);
 	return result;
 };
