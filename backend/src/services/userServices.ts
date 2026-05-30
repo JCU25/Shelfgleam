@@ -5,8 +5,10 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import type { StringValue } from "ms";
 import fs from "fs";
+
 dotenv.config({
-	path: ".env",
+	path: "./config/.env",
+override: true,
 });
 
 interface CreateUserParams {

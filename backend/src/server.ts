@@ -7,7 +7,7 @@ import routes from "./routes/index.js";
 import { swaggerSpec } from "../swagger.js";
 
 dotenv.config({
-	path: ".env",
+	path: "./config/.env",
 	override: true,
 });
 
