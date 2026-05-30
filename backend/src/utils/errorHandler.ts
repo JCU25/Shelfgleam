@@ -11,11 +11,16 @@ const handleDbException = async (error: DatabaseError) => {
 };
 
 export const handleException = async (error: unknown) => {
-	const errorMessage = "An unexpected error occured. Please try again later.";
+	let errorMessage = "An unexpected error occured. Please try again later.";
 
 	// if error is a DatabaseError, handle using handleDbException
 	if (error instanceof DatabaseError) {
 		return await handleDbException(error);
 	}
+
+	if (error instanceof Error) {
+		return error.message;
+	}
+
 	return errorMessage;
 };
