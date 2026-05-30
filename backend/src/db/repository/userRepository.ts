@@ -1,6 +1,5 @@
-import { db } from "../db/database.js";
-import { v4 as uuidv4, type UUIDTypes } from "uuid";
-import bcrypt from "bcrypt";
+import { db } from "../database.js";
+import { type UUIDTypes } from "uuid";
 import chalk from "chalk";
 import util from "util";
 
@@ -22,10 +21,10 @@ export const createUser = async ({
 	const user = await db
 		.insertInto("users")
 		.values({
-			id: uuidv4(),
+			id: id,
 			username,
 			email,
-			password_hash: await bcrypt.hash(password, 10),
+			password_hash: password,
 			display_name: displayName,
 		})
 		.returning(["id", "email", "username", "display_name"])

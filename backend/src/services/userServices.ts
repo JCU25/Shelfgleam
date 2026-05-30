@@ -5,47 +5,39 @@ import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import type { StringValue } from "ms";
 import fs from "fs";
+import { createUser } from "../db/repository/userRepository.js";
 
 dotenv.config({
 	path: "./config/.env",
 override: true,
 });
 
-interface CreateUserParams {
-	username: string;
+type SignUpParams = {
 	email: string;
+	username: string;
 	password: string;
 	displayName?: string;
-}
+};
 
-/**
- * Create a user record in the database
- * @param username
- * @param email
- * @param password
- * @param displayName
- * @returns User.id, User.email, User.username, User.display_name
- */
-export const createUser = async ({
-	username,
+export const userSignUp = async ({
 	email,
+	username,
 	password,
 	displayName,
-}: CreateUserParams) => {
-	const result = await db
-		.insertInto("users")
-		.values({
+}: SignUpParams) => {
+	// create user
+	const user = await createUser({
 			id: uuidv4(),
+		email,
 			username,
-			email,
-			password_hash: await bcrypt.hash(password, 10),
-			display_name: displayName,
-		})
-		.returning(["id", "email", "username", "display_name"])
-		.executeTakeFirst();
+		password: await bcrypt.hash(password, 10),
+		displayName,
+	});
 
-	console.log(`Created user`, result);
-	return result;
+	// todo: verification
+
+	console.log("Successfully signed up User.");
+	return user;
 };
 
 type LoginWithUsername = {
