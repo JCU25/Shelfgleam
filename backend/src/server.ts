@@ -4,10 +4,10 @@ import dotenv from "dotenv";
 import express from "express";
 import http from "http";
 import routes from "./routes/index.js";
-import { swaggerSpec } from "../swagger.js";
+import { swaggerSpec } from "./config/swagger.js";
 
 dotenv.config({
-	path: ".env",
+	path: "./config/.env",
 	override: true,
 });
 

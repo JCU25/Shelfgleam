@@ -2,8 +2,10 @@ import type { Database } from "./schema/dbSchema.js";
 import { Pool } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
 import dotenv from "dotenv";
+
 dotenv.config({
-	path: ".env",
+	path: "./config/.env",
+	override: true,
 });
 
 const dialect = new PostgresDialect({

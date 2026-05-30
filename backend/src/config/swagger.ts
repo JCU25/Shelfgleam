@@ -3,6 +3,9 @@ import swaggerJsdoc from "swagger-jsdoc";
 const options: swaggerJsdoc.Options = {
 	definition: {
 		openapi: "3.0.0",
+		host: `localhost:${process.env.PORT}`,
+		basePath: "/api/v1",
+
 		info: {
 			title: "Shelfgleam API",
 			version: "1.0.0",
@@ -10,7 +13,7 @@ const options: swaggerJsdoc.Options = {
 		},
 		servers: [
 			{
-				url: "http://localhost:3000",
+				url: "http://localhost:8000",
 				description: "Development server",
 			},
 		],

@@ -1,12 +1,12 @@
 import type { Request, Response } from "express";
-import { createUser, userLogin } from "../services/userServices.js";
+import { userSignUp, userLogin } from "../services/userServices.js";
 
 const signup = async (req: Request, res: Response) => {
 	try {
 		const { username, email, password, displayName } = req.body;
 		if (!(username && email && password))
 			throw new Error("Username, email and password are required");
-		const user = await createUser({
+		const user = await userSignUp({
 			username,
 			email,
 			password,
