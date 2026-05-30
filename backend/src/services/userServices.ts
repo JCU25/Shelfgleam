@@ -9,7 +9,7 @@ import { createUser } from "../db/repository/userRepository.js";
 
 dotenv.config({
 	path: "./config/.env",
-override: true,
+	override: true,
 });
 
 type SignUpParams = {
@@ -27,9 +27,9 @@ export const userSignUp = async ({
 }: SignUpParams) => {
 	// create user
 	const user = await createUser({
-			id: uuidv4(),
+		id: uuidv4(),
 		email,
-			username,
+		username,
 		password: await bcrypt.hash(password, 10),
 		displayName,
 	});
@@ -74,7 +74,7 @@ export const userLogin = async ({
 	if (!password_match) throw Error("Invalid Credentials");
 
 	// create user token
-	const privateKey = fs.readFileSync(`${process.cwd()}/private.key`);
+	const privateKey = fs.readFileSync(`${process.cwd()}/config/private.key`);
 	const accessTokenDuration = process.env
 		.ACCESS_TOKEN_DURATION as StringValue;
 
