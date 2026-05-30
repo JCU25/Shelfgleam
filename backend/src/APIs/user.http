@@ -1,9 +1,0 @@
-### User Signup
-POST {{host}}/api/v1/users/signup
-Content-Type: application/json
-
-{
-    "username": "sample",
-    "email": "someone@example.com",
-    "password": "123"
-}
