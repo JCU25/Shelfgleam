@@ -35,5 +35,9 @@
 		"noUncheckedSideEffectImports": true,
 		"moduleDetection": "force",
 		"skipLibCheck": true
+	},
+	"ts-node": {
+		"logError": true,
+		"pretty": true
 	}
 }
