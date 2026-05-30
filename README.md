@@ -1,8 +1,8 @@
 # Shelfgleam
 
-This is a bookshelf project to give you information, reviews and recommendations for your shelves!
+This is an ongoing **bookshelf project** to give you information, reviews and recommendations for your shelves!
 
-Tech stacks used: _Add Images_
+Tech stacks used:
 Node.js
 React.js
 PostgreSQL
@@ -28,6 +28,10 @@ This project uses dbmate for migrations.
 **Database used**: PostgreSQL
 
 #### Migration Commands:
+
+`npx dbmate create` - to create database
+
+`npx dbmate drop` - to drop database, in case you want to remake your database
 
 `npm run db:migrate` - create database (if it doesn't exist) and run any pending migrations
 
