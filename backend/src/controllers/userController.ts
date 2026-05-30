@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { userSignUp, userLogin } from "../services/userServices.js";
+import { handleException } from "../utils/errorHandler.js";
 
 // const get = async (req: Request, res: Response) => {
 // 	try {
@@ -22,24 +23,24 @@ const signup = async (req: Request, res: Response) => {
 			message: "Successfully created User",
 		});
 	} catch (error) {
-		console.log(error);
+		const errorMessage = await handleException(error);
 		return res.status(500).json({
 			// todo: improve error messages based on error type
-			message: "Failed to create user",
+			message: errorMessage,
 		});
 	}
 };
 
 const login = async (req: Request, res: Response) => {
 	try {
+		let result;
 		const { username, password, email } = req.body;
 
 		if (!(username || email) && !password) {
 			throw new Error("Please enter your email/username and password.");
 		}
 
-		let result;
-
+		// login user with username/email
 		if (username) {
 			// call user service login
 			result = await userLogin({
@@ -60,9 +61,10 @@ const login = async (req: Request, res: Response) => {
 			message: "Log in successful.",
 		});
 	} catch (error) {
+		const errorMessage = await handleException(error);
 		console.log(error);
 		return res.json({
-			message: "Login failed. Please verify your credentials.",
+			message: errorMessage,
 		});
 	}
 };
