@@ -1,6 +1,11 @@
 import type { Request, Response } from "express";
 import { userSignUp, userLogin } from "../services/userServices.js";
 
+// const get = async (req: Request, res: Response) => {
+// 	try {
+// 	} catch (error) {}
+// };
+
 const signup = async (req: Request, res: Response) => {
 	try {
 		const { username, email, password, displayName } = req.body;
@@ -62,6 +67,6 @@ const login = async (req: Request, res: Response) => {
 	}
 };
 
-const logout = async (req: Request, res: Response) => {};
+// const logout = async (req: Request, res: Response) => {};
 
-export default { login, logout, signup };
+export default { login, signup };

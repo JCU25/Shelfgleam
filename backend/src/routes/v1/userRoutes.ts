@@ -3,6 +3,8 @@ import userController from "../../controllers/userController.js";
 
 const router = Router();
 
+// router.get("/:id", userController.get);
+
 /**
  * @swagger
  * /api/v1/users/signup:
@@ -60,6 +62,6 @@ router.post("/signup", userController.signup);
  *         description: Login Failed
  */
 router.post("/login", userController.login);
-router.post("/logout", userController.logout);
+// router.post("/logout", userController.logout);
 
 export default router;
