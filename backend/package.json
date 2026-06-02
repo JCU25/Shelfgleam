@@ -4,8 +4,9 @@
 	"type": "module",
 	"main": "server.ts",
 	"scripts": {
-		"db:migrate": "npx dbmate --migrations-dir ./src/db/migrations up",
-		"db:rollback": "npx dbmate --migrations-dir ./src/db/migrations down",
+		"db:migrate": "npx dbmate --env-file ./config/.env up",
+		"db:rollback": "npx dbmate --env-file ./config/.env down",
+		"db:drop": "npx dbmate --env-file ./config/.env drop",
 		"dev": "echo \"Running development server\" && nodemon --exec node --loader ts-node/esm src/server.ts --trace-deprecation",
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
@@ -22,6 +23,7 @@
 		"@types/swagger-jsdoc": "^6.0.4",
 		"@types/swagger-ui-express": "^4.1.8",
 		"dbmate": "^2.33.0",
+		"kysely-codegen": "^0.20.0",
 		"nodemon": "^3.1.14",
 		"ts-node": "^10.9.2",
 		"typescript": "^6.0.3"

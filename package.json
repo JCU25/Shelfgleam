@@ -1,0 +1,11 @@
+{
+	"name": "shelfgleam-root",
+	"version": "1.0.0",
+	"description": "This is an ongoing **bookshelf project** to give you information, reviews and recommendations for your shelves!",
+	"private": true,
+	"workspaces": [
+		"backend",
+		"frontend"
+	],
+	"author": "JCU25"
+}
