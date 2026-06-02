@@ -33,7 +33,7 @@ const signup = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
 	try {
-		let result;
+		let token;
 		const { username, password, email } = req.body;
 
 		if (!(username || email) && !password) {
@@ -42,13 +42,12 @@ const login = async (req: Request, res: Response) => {
 
 		// login user with username/email
 		if (username) {
-			// call user service login
-			result = await userLogin({
+			token = await userLogin({
 				username,
 				password,
 			});
 		} else if (email) {
-			result = await userLogin({
+			token = await userLogin({
 				email,
 				password,
 			});
@@ -57,13 +56,13 @@ const login = async (req: Request, res: Response) => {
 		// todo: create user Session
 
 		return res.status(200).json({
-			result,
+			token,
 			message: "Log in successful.",
 		});
 	} catch (error) {
 		const errorMessage = await handleException(error);
 		console.log(error);
-		return res.json({
+		return res.status(500).json({
 			message: errorMessage,
 		});
 	}
