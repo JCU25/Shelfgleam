@@ -11,7 +11,9 @@ const signup = async (req: Request, res: Response) => {
 	try {
 		const { username, email, password, displayName } = req.body;
 		if (!(username && email && password))
-			throw new Error("Username, email and password are required");
+			return res.status(400).json({
+				message: "Username, email, and password are required fields.",
+			});
 		const user = await userSignUp({
 			username,
 			email,
@@ -24,6 +26,7 @@ const signup = async (req: Request, res: Response) => {
 		});
 	} catch (error) {
 		const errorMessage = await handleException(error);
+		console.log(errorMessage);
 		return res.status(500).json({
 			// todo: improve error messages based on error type
 			message: errorMessage,
