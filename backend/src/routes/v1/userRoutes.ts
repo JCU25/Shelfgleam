@@ -32,6 +32,8 @@ const router = Router();
  *         description: User created successfully
  *       500:
  *         description: Internal server error
+ *       400:
+ *         description: Bad request/missing parameters
  */
 router.post("/signup", userController.signup);
 
