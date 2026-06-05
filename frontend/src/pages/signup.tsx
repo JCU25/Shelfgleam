@@ -1,6 +1,9 @@
-import Button from "../components/button";
+import Button from "../components/Button";
 import { useState } from "react";
 import { api } from "../utlils/publicApi";
+import { Link } from "react-router-dom";
+import CheckIcon from "../assets/icon-park-outline_check-one.svg?react";
+import Header from "../components/Header";
 
 interface FormDataInput {
 	username: FormDataEntryValue | null;
@@ -100,22 +103,34 @@ export default function Signup() {
 	};
 
 	return success ? (
-		<section className="flex min-h-svh px-4 py-16 md:py-20 justify-center">
-			<div className="p-10 rounded-lg bg-gray-100 h-70 md:h-80">
-				<img src="" alt="" />
+		<section className="flex flex-col min-h-svh">
+			<Header></Header>
+			<div className="px-4 py-16 md:py-20 w-fit self-center">
+				<div className="relative flex flex-col gap-8 h-fit p-10 rounded-lg bg-radial from-purple-200 to-white justify-center md:items-center shadow-md ld:shadow-lg">
+					<div className="flex flex-row items-center justify-center gap-4">
+						<h1 className="font-bold text-3xl md:text-3xl md:mt-6">
+							Success!
+						</h1>
+					</div>
+					<div className="flex flex-col gap-8 items-center">
+						<CheckIcon className="w-20 h-20 md:absolute top-[-15%] md:w-20 md:h-20 fill-white"></CheckIcon>
 
-				<h1 className="font-bold text-3xl md:text-4xl">Great!</h1>
-				<p className="text-sm mt-10">
-					<span>
-						You've successfully signed up to Shelfgleam. Make sure
-						to verify your email.
-					</span>
-				</p>
+						<p className="text-center">
+							You've successfully created a Shelfgleam account!
+							Make sure to verify your email.
+						</p>
+						<Link className="flex justify-center" to={"/login"}>
+							<Button customStyle="self-center">
+								Proceed to Login
+							</Button>
+						</Link>
+					</div>
+				</div>
 			</div>
 		</section>
 	) : (
 		<>
-			<section className="min-w-svw flex flex-row items-center bg-purple-500 min-h-svh overflow:auto">
+			<section className="min-w-svw flex flex-row items-center bg-purple-500 min-h-svh">
 				<div className="absolute z-0 bottom-0 left-0 flex bg-black w-full h-[50%]"></div>
 
 				<div className="hidden md:flex z-1 w-1/2 min-h-svh bg-white">
