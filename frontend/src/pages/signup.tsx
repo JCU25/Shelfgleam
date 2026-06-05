@@ -99,7 +99,7 @@ export default function Signup() {
 		input: "px-2 py-1.5 md:px-2 bg-purple-200 focus:outline-purple-500 focus:bg-white placeholder:text-black/50 text-black text-sm rounded-sm border border-white/10",
 		label: "text-black text-xs text-gray-300",
 		inputDiv: "flex flex-col gap-1",
-		error: "text-red-600 text-xs md:text-sm ",
+		error: "text-red-500 text-xs md:text-sm",
 	};
 
 	return success ? (
@@ -164,7 +164,7 @@ export default function Signup() {
 								required={true}
 								name="username"
 								type="text"
-								placeholder="username"
+								placeholder="shelfgleam25"
 							/>
 							{errors.username && (
 								<p className={styles.error}>
@@ -182,7 +182,7 @@ export default function Signup() {
 								required={true}
 								name="email"
 								type="text"
-								placeholder="email"
+								placeholder="sample@shelfgleam.com"
 							/>
 							{errors.email && (
 								<p className={styles.error}>{errors.email}</p>
@@ -213,7 +213,6 @@ export default function Signup() {
 								required={true}
 								name="password"
 								type="password"
-								placeholder="password"
 							/>
 							{errors.password && (
 								<p className={styles.error}>
@@ -234,7 +233,6 @@ export default function Signup() {
 								required={true}
 								name="confirmPassword"
 								type="password"
-								placeholder="confirm password"
 							/>
 							{errors.password && (
 								<p className={styles.error}>
