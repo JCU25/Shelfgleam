@@ -1,28 +1,29 @@
 import HeaderRight from "./headerRight";
-import logo from "../assets/vite.svg";
+import logo from "../assets/shelfgleam-logo.svg";
+import { NavLink } from "react-router-dom";
 
 export default function Header() {
 	const styles = {
-		a: "flex flex-row align-center justify-center",
+		link: "whitespace-nowrap px-4 py-2 bg-transparent hover:bg-radial from-purple-200 to-white ",
 	};
 	return (
 		<>
-			<header className="h-8 flex flex-row align-center justify-between px-4">
-				<img className="w-10" src={logo} alt="logo" />
+			<header className="relative h-14 px-2 md:px-4 w-full flex flex-row items-center justify-between bg-white py-2 shadow-sm">
+				<img className="w-6" src={logo} alt="logo" />
 
-				<div className="hidden md:flex bg-white flex-row gap-7 justify-center">
-					<a className={styles.a} href="/home">
-						<p>Home</p>
-					</a>
-					<a className={styles.a} href="/products">
-						<p>Products</p>
-					</a>
-					<a className={styles.a} href="/contact-us">
-						<p>Contact Us</p>
-					</a>
-					<a className={styles.a} href="/about">
-						<p>About</p>
-					</a>
+				<div className="absolute bottom-[50%] top-[50%] left-[50%] right-[50%] hidden md:flex flex-row gap-7 items-center justify-center">
+					<NavLink className={styles.link} to="/">
+						Home
+					</NavLink>
+					<NavLink className={styles.link} to="/products">
+						Products
+					</NavLink>
+					<NavLink className={styles.link} to="/contact">
+						Contact Us
+					</NavLink>
+					<NavLink className={styles.link} to="/about">
+						About
+					</NavLink>
 				</div>
 
 				<HeaderRight />
