@@ -3,9 +3,11 @@ import chalk from "chalk";
 import dotenv from "dotenv";
 import express from "express";
 import http from "http";
+import cors from "cors";
+import cookieParser from "cookie-parser";
+
 import routes from "./routes/index.js";
 import { swaggerSpec } from "./config/swagger.js";
-import cors from "cors";
 
 dotenv.config({
 	path: "./config/.env",
@@ -18,8 +20,10 @@ const port = process.env.PORT || 3000;
 app.use(
 	cors({
 		origin: process.env.ALLOWED_ORIGIN,
+		credentials: true,
 	}),
 );
+app.use(cookieParser());
 app.use(express.json());
 app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use("/api", routes);
