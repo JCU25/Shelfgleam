@@ -9,12 +9,14 @@ export default function Header() {
 	return (
 		<>
 			<header className="relative h-14 px-2 md:px-4 w-full flex flex-row items-center justify-between bg-white py-2 shadow-sm">
-				<img className="w-6" src={logo} alt="logo" />
+				<NavLink to="/">
+					<img className="w-6" src={logo} alt="logo" />
+				</NavLink>
 
-				<div className="absolute bottom-[50%] top-[50%] left-[50%] right-[50%] hidden md:flex flex-row gap-7 items-center justify-center">
-					<NavLink className={styles.link} to="/">
+				<div className="absolute bottom-[50%] top-[50%] left-[50%] right-[50%] hidden md:flex flex-row gap-1 items-center justify-center">
+					{/* <NavLink className={styles.link} to="/">
 						Home
-					</NavLink>
+					</NavLink> */}
 					<NavLink className={styles.link} to="/products">
 						Products
 					</NavLink>
