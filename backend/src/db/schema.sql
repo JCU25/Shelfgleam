@@ -151,7 +151,7 @@ ALTER SEQUENCE public.user_books_link_id_seq OWNED BY public.user_books_link.id;
 CREATE TABLE public.user_sessions (
     id integer NOT NULL,
     user_id character varying NOT NULL,
-    token_hash character varying(64) NOT NULL,
+    token_hash character varying NOT NULL,
     user_agent text NOT NULL,
     ip_address character varying(45) NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
