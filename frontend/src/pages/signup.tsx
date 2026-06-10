@@ -39,7 +39,7 @@ export default function Signup() {
 	const fetchApi = async (data: FormDataInput) => {
 		try {
 			const response = await api.post<SignUpResponse>(
-				`${import.meta.env.VITE_API_ENDPOINT}/users/signup`,
+				`/users/signup`,
 				data,
 			);
 			setIsSubmitting(false);
