@@ -51,9 +51,7 @@ router.post("/signup", userController.signup);
  *             type: object
  *             required: [username, email, password]
  *             properties:
- *               username:
- *                 type: string
- *               email:
+ *               usernameOrEmail:
  *                 type: string
  *               password:
  *                 type: string
