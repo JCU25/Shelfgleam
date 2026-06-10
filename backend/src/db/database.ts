@@ -1,7 +1,7 @@
-import type { Database } from "./schema/dbSchema.js";
 import { Pool } from "pg";
 import { Kysely, PostgresDialect } from "kysely";
 import dotenv from "dotenv";
+import type { DB } from "kysely-codegen";
 
 dotenv.config({
 	path: "./config/.env",
@@ -18,6 +18,6 @@ const dialect = new PostgresDialect({
 	}),
 });
 
-export const db = new Kysely<Database>({
+export const db = new Kysely<DB>({
 	dialect,
 });
