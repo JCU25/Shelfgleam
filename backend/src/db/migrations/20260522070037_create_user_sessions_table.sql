@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS user_sessions (
     id SERIAL PRIMARY KEY,
     user_id VARCHAR REFERENCES users(id) ON DELETE CASCADE NOT NULL,
-    token_hash VARCHAR(64) NOT NULL,
+    token_hash VARCHAR NOT NULL,
     user_agent TEXT NOT NULL,
     ip_address VARCHAR(45) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
