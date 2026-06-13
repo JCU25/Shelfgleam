@@ -2,8 +2,8 @@ import Button from "../components/Button";
 import { useState } from "react";
 import { api } from "../utlils/publicApi";
 import { Link } from "react-router-dom";
-import CheckIcon from "../assets/icon-park-outline_check-one.svg?react";
-import bookNook from "../assets/pexels-cozy-book-corner.jpg";
+import CheckIcon from "/public/icon-park-outline_check-one.svg?react";
+import bookNook from "/pexels-cozy-book-corner.jpg";
 import Header from "../components/Header";
 
 interface FormDataInput {
@@ -100,7 +100,7 @@ export default function Signup() {
 		input: "px-2 py-1.5 md:px-2 bg-purple-200 focus:outline-purple-500 focus:bg-white placeholder:text-black/50 text-black text-sm rounded-sm border border-white/10",
 		label: "text-black text-xs text-gray-300",
 		inputDiv: "flex flex-col gap-1",
-		error: "text-red-500 text-xs md:text-sm",
+		error: "text-shelf-red-400 text-xs md:text-sm",
 	};
 
 	return success ? (
@@ -136,7 +136,7 @@ export default function Signup() {
 
 				<div className="relative hidden md:flex z-1 w-1/2 h-svh bg-black overflow-hidden">
 					<img
-						className="object-cover lg:w-full "
+						className="object-cover lg:w-full h-full"
 						src={bookNook}
 						alt="Image of a book nook"
 					/>

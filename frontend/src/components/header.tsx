@@ -1,5 +1,5 @@
 import HeaderRight from "./headerRight";
-import logo from "../assets/shelfgleam-logo.svg";
+import logo from "/shelfgleam-logo.svg";
 import { NavLink } from "react-router-dom";
 
 export default function Header() {

@@ -7,7 +7,7 @@ export default function Home() {
 
 			<section className="relative dark:bg-linear-to-b from-black to-shelf-black-700 min-h-svh">
 				<img
-					src="/src/assets/bookshelf-image.png"
+					src="/public/bookshelf-image.png"
 					alt="bookshelf image"
 					className="hidden md:flex md:w-full"
 				/>

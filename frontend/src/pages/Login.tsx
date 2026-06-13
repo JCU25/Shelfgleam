@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import shelfLogo from "../assets/shelfgleam-logo.svg";
+import shelfLogo from "/public/shelfgleam-logo.svg";
 import { api } from "../utlils/authenticatedApi";
 import Button from "../components/Button";
 import { useNavigate } from "react-router-dom";
