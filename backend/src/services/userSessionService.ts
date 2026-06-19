@@ -1,6 +1,13 @@
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
+import dotenv from "dotenv";
 
 import userSessionRepository from "../db/repository/userSessionRepository.js";
+
+dotenv.config({
+	path: "./config/.env",
+	override: true,
+});
 
 interface userSessionInput {
 	userId: string;
@@ -45,13 +52,16 @@ export const createUserSession = async ({
 			);
 			break;
 	}
-
-	const newRefreshToken = jwt.sign(
-		{
-			user_id: userId,
-			user_agent: userAgent,
-		},
-		process.env.REFRESH_SECRET as string,
+	const saltRounds = await bcrypt.genSalt(10);
+	const newRefreshToken = await bcrypt.hash(
+		jwt.sign(
+			{
+				user_id: userId,
+				user_agent: userAgent,
+			},
+			process.env.REFRESH_SECRET as string,
+		),
+		saltRounds,
 	);
 
 	// create userSession

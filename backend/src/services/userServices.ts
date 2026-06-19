@@ -25,12 +25,14 @@ export const userSignUp = async ({
 	password,
 	displayName,
 }: SignUpParams) => {
+	const salt = await bcrypt.genSalt(10);
+
 	// create user
 	const user = await createUser({
 		id: uuidv4(),
 		email,
 		username,
-		password: await bcrypt.hash(password, 10),
+		password: await bcrypt.hash(password, salt),
 		displayName,
 	});
 
