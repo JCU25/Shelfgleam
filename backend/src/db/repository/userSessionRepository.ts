@@ -8,11 +8,20 @@ dotenv.config({
 	path: "./config/.env",
 });
 
+const findUserSessionByUsername = async (userId: string) => {
+	const userSession = await db
+		.selectFrom("user_sessions")
+		.where("user_id", "=", userId)
+		.select(["id", "user_id", "token_hash", "user_agent", "created_at"]);
+
+	return userSession;
+};
+
 const findUserSessionById = async (userId: string) => {
 	const userSession = await db
 		.selectFrom("user_sessions")
 		.where("user_id", "=", userId)
-		.select(["id", "token_hash", "user_agent", "created_at"]);
+		.select(["id", "user_id", "token_hash", "user_agent", "created_at"]);
 
 	return userSession;
 };
@@ -45,7 +54,7 @@ const create = async ({
 		.executeTakeFirst();
 
 	console.log(
-		chalk.blueBright`USER REPOSITORY: Successfully created user Session:`,
+		chalk.blueBright`USER SESSIONS REPOSITORY: Successfully created user Session:`,
 		util.inspect(userSession, {
 			colors: true,
 			depth: null,
@@ -54,6 +63,7 @@ const create = async ({
 };
 
 export default {
+	findUserSessionByUsername,
 	findUserSessionById,
 	create,
 };
