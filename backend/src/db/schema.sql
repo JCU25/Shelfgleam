@@ -156,7 +156,8 @@ CREATE TABLE public.user_sessions (
     ip_address character varying(45) NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    expires_at timestamp with time zone NOT NULL
+    expires_at timestamp with time zone NOT NULL,
+    is_revoked boolean
 );
 
 
@@ -413,4 +414,5 @@ INSERT INTO public.schema_migrations (version) VALUES
     ('20260531133718'),
     ('20260531135642'),
     ('20260531135905'),
-    ('20260531135911');
+    ('20260531135911'),
+    ('20260619135530');
