@@ -1,10 +1,11 @@
 import { v4 as uuidv4 } from "uuid";
 import bcrypt from "bcrypt";
-import { db } from "../db/database.js";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import type { StringValue } from "ms";
 import fs from "fs";
+
+import { db } from "../db/database.js";
 import { createUser } from "../db/repository/userRepository.js";
 
 dotenv.config({
