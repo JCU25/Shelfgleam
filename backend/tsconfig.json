@@ -7,9 +7,9 @@
 		"moduleResolution": "nodenext",
 		"target": "esnext",
 		"esModuleInterop": true,
-		// For nodejs:
+		// For nodejs and tests:
 		"lib": ["esnext"],
-		"types": ["node"],
+		"types": ["node", "jest"],
 
 		// Other Outputs
 		"sourceMap": true,
@@ -38,6 +38,8 @@
 	},
 	"ts-node": {
 		"logError": true,
-		"pretty": true
-	}
+		"pretty": true,
+		"esm": true
+	},
+	"include": ["src/**/*", "tests"]
 }
