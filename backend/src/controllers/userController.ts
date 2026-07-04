@@ -1,11 +1,8 @@
 import type { Request, Response } from "express";
 import { userSignUp, userLogin } from "../services/userServices.js";
 import { handleException } from "../utils/errorHandler.js";
+import { createUserSession } from "../services/userSessionService.js";
 
-// const get = async (req: Request, res: Response) => {
-// 	try {
-// 	} catch (error) {}
-// };
 
 const signup = async (req: Request, res: Response) => {
 	try {
@@ -36,30 +33,49 @@ const signup = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
 	try {
-		let token;
-		const { username, password, email } = req.body;
+		const { usernameOrEmail, password } = req.body;
+		const userAgent = req.headers["user-agent"];
+		const ipAddress = req.ip;
 
-		if (!(username || email) && !password) {
+		// checking required params
+		if (!usernameOrEmail || !password) {
 			throw new Error("Please enter your email/username and password.");
 		}
+		if (!userAgent || !ipAddress)
+			return res.status(400).json({
+				message: "Missing user session params",
+			});
 
 		// login user with username/email
-		if (username) {
-			token = await userLogin({
-				username,
-				password,
+		const result = await userLogin({
+			usernameOrEmail,
+			password,
+		});
+
+		if (!result.accessToken)
+			return res.status(500).json({
+				message: "Access token not found",
 			});
-		} else if (email) {
-			token = await userLogin({
-				email,
-				password,
+
+		// create userSession -> put in controller
+		const userSession = await createUserSession({
+			userAgent,
+			userId: result.userId,
+			ipAddress,
+		});
+
+		if (!userSession.refreshToken) {
+			return res.status(500).json({
+				message: "Refresh token not found.",
 			});
 		}
 
-		// todo: create user Session
+		res.cookie("refreshToken", userSession.refreshToken, {
+			httpOnly: true,
+			sameSite: "strict",
+		});
 
 		return res.status(200).json({
-			token,
 			message: "Log in successful.",
 		});
 	} catch (error) {

@@ -151,12 +151,13 @@ ALTER SEQUENCE public.user_books_link_id_seq OWNED BY public.user_books_link.id;
 CREATE TABLE public.user_sessions (
     id integer NOT NULL,
     user_id character varying NOT NULL,
-    token_hash character varying(64) NOT NULL,
+    token_hash character varying NOT NULL,
     user_agent text NOT NULL,
     ip_address character varying(45) NOT NULL,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP,
-    expires_at timestamp with time zone NOT NULL
+    expires_at timestamp with time zone NOT NULL,
+    is_revoked boolean
 );
 
 
@@ -413,4 +414,5 @@ INSERT INTO public.schema_migrations (version) VALUES
     ('20260531133718'),
     ('20260531135642'),
     ('20260531135905'),
-    ('20260531135911');
+    ('20260531135911'),
+    ('20260619135530');

@@ -1,10 +1,9 @@
 import { db } from "../database.js";
-import { type UUIDTypes } from "uuid";
 import chalk from "chalk";
 import util from "util";
 
 export type CreateUserParams = {
-	id: UUIDTypes;
+	id: string;
 	username: string;
 	email: string;
 	password: string;

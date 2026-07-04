@@ -25,12 +25,14 @@ export const userSignUp = async ({
 	password,
 	displayName,
 }: SignUpParams) => {
+	const salt = await bcrypt.genSalt(10);
+
 	// create user
 	const user = await createUser({
 		id: uuidv4(),
 		email,
 		username,
-		password: await bcrypt.hash(password, 10),
+		password: await bcrypt.hash(password, salt),
 		displayName,
 	});
 
@@ -40,30 +42,24 @@ export const userSignUp = async ({
 	return user;
 };
 
-type LoginWithUsername = {
-	username: string;
-	email?: never;
+type UserLoginParams = {
+	usernameOrEmail: string;
 	password: string;
 };
-
-type LoginWithEmail = {
-	username?: never;
-	email: string;
-	password: string;
-};
-
-type UserLoginParams = LoginWithUsername | LoginWithEmail;
 
 export const userLogin = async ({
-	username,
+	usernameOrEmail,
 	password,
-	email,
 }: UserLoginParams) => {
 	let query = await db
 		.selectFrom("users")
-		.select(["id", "email", "username", "password_hash"]);
-	if (username) query = query.where("username", "=", username);
-	if (email) query = query.where("email", "=", email);
+		.select(["id", "email", "username", "password_hash"])
+		.where((eb) =>
+			eb.or([
+				eb("username", "=", usernameOrEmail),
+				eb("email", "=", usernameOrEmail),
+			]),
+		);
 
 	// check if user exists based on username/email
 	const user = await query.executeTakeFirst();
@@ -78,7 +74,7 @@ export const userLogin = async ({
 	const accessTokenDuration = process.env
 		.ACCESS_TOKEN_DURATION as StringValue;
 
-	const token = jwt.sign(
+	const accessToken = jwt.sign(
 		{
 			id: user.id,
 			email: user.email,
@@ -91,5 +87,8 @@ export const userLogin = async ({
 		},
 	);
 
-	return token;
+	return {
+		userId: user.id,
+		accessToken,
+	};
 };

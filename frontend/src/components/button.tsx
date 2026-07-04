@@ -21,7 +21,7 @@ export default function Button({
 	return (
 		<button
 			className={clsx(
-				`px-4 py-2 md:px-2 md:px-4 md:py-0 md:py-1 rounded-[10px]`,
+				`px-4 py-2 md:px-6 md:py-2  rounded-[10px]`,
 				`disabled:bg-purple-200 disabled:text-gray-500`,
 
 				isPrimary
