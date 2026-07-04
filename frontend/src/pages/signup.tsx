@@ -1,6 +1,10 @@
-import Button from "../components/button";
+import Button from "../components/Button";
 import { useState } from "react";
 import { api } from "../utlils/publicApi";
+import { Link } from "react-router-dom";
+import CheckIcon from "../assets/icon-park-outline_check-one.svg?react";
+import bookNook from "../assets/pexels-cozy-book-corner.jpg";
+import Header from "../components/Header";
 
 interface FormDataInput {
 	username: FormDataEntryValue | null;
@@ -36,7 +40,7 @@ export default function Signup() {
 	const fetchApi = async (data: FormDataInput) => {
 		try {
 			const response = await api.post<SignUpResponse>(
-				`${import.meta.env.VITE_API_ENDPOINT}/users/signup`,
+				`/users/signup`,
 				data,
 			);
 			setIsSubmitting(false);
@@ -96,33 +100,50 @@ export default function Signup() {
 		input: "px-2 py-1.5 md:px-2 bg-purple-200 focus:outline-purple-500 focus:bg-white placeholder:text-black/50 text-black text-sm rounded-sm border border-white/10",
 		label: "text-black text-xs text-gray-300",
 		inputDiv: "flex flex-col gap-1",
-		error: "text-red-600 text-xs md:text-sm ",
+		error: "text-red-500 text-xs md:text-sm",
 	};
 
 	return success ? (
-		<section className="flex min-h-svh px-4 py-16 md:py-20 justify-center">
-			<div className="p-10 rounded-lg bg-gray-100 h-70 md:h-80">
-				<img src="" alt="" />
+		<section className="flex flex-col min-h-svh bg-linear-to-b from-white to-purple-900 bg-black/20 dark:from-purple-500 dark:to-purple-900 dark:bg-black/50 bg-blend-overlay">
+			<Header></Header>
+			<div className="px-4 py-16 md:py-20 w-fit self-center">
+				<div className="relative flex flex-col gap-8 h-fit p-10 rounded-lg bg-radial from-purple-200 to-white justify-center md:items-center shadow-md ld:shadow-lg">
+					<div className="flex flex-row items-center justify-center gap-4">
+						<h1 className="font-bold text-3xl md:text-3xl md:mt-6">
+							Success!
+						</h1>
+					</div>
+					<div className="flex flex-col gap-8 items-center">
+						<CheckIcon className="w-20 h-20 md:absolute top-[-15%] md:w-20 md:h-20 fill-white"></CheckIcon>
 
-				<h1 className="font-bold text-3xl md:text-4xl">Great!</h1>
-				<p className="text-sm mt-10">
-					<span>
-						You've successfully signed up to Shelfgleam. Make sure
-						to verify your email.
-					</span>
-				</p>
+						<p className="text-center">
+							You've successfully created a Shelfgleam account!
+							Make sure to verify your email.
+						</p>
+						<Link className="flex justify-center" to={"/login"}>
+							<Button customStyle="self-center">
+								Proceed to Login
+							</Button>
+						</Link>
+					</div>
+				</div>
 			</div>
 		</section>
 	) : (
 		<>
-			<section className="min-w-svw flex flex-row items-center bg-purple-500 min-h-svh overflow:auto">
-				<div className="absolute z-0 bottom-0 left-0 flex bg-black w-full h-[50%]"></div>
+			<section className="min-w-svw flex flex-row items-center bg-linear-to-br from-purple-400 from-35% to-black min-h-svh">
+				{/* <div className="absolute z-0 bottom-0 left-0 flex bg-black w-full h-[50%] shadow-lg"></div> */}
 
-				<div className="hidden md:flex z-1 w-1/2 min-h-svh bg-white">
-					<p>LEARN MORE ABOUT BOOKS AND EXPAND YOUR SHELVES!</p>
+				<div className="relative hidden md:flex z-1 w-1/2 h-svh bg-black overflow-hidden">
+					<img
+						className="object-cover lg:w-full "
+						src={bookNook}
+						alt="Image of a book nook"
+					/>
+					<div className="absolute w-full h-full bg-purple-200/20"></div>
 				</div>
 
-				<div className="z-1 flex flex-col w-[100%] md:w-1/2 px-2 py-4">
+				<div className="z-1 flex flex-col w-full md:w-1/2 px-2 py-4">
 					<div className="flex flex-col items-center z-1 px-6">
 						<h1 className="flex flex-col gap-2 text-center text-white text-3xl md:text-3xl lg:text-4xl mt-10 font-bold">
 							<span>Welcome</span>
@@ -138,7 +159,7 @@ export default function Signup() {
 					<form
 						id="form"
 						onSubmit={handleSubmit}
-						className="flex flex-col gap-3 w-full md:w-5/6 lg:w-4/5 self-center rounded-lg z-1 px-4 py-4 md:py-8 lg:px-8 bg-zinc-800 mt-10 mb-4"
+						className="flex flex-col gap-3 w-full md:w-5/6 lg:w-4/5 self-center rounded-lg z-1 px-4 py-4 md:py-8 lg:px-8 bg-zinc-900 mt-10 mb-4"
 					>
 						<div className={styles.inputDiv}>
 							<label htmlFor="username" className={styles.label}>
@@ -149,7 +170,7 @@ export default function Signup() {
 								required={true}
 								name="username"
 								type="text"
-								placeholder="username"
+								placeholder="shelfgleam25"
 							/>
 							{errors.username && (
 								<p className={styles.error}>
@@ -167,7 +188,7 @@ export default function Signup() {
 								required={true}
 								name="email"
 								type="text"
-								placeholder="email"
+								placeholder="sample@shelfgleam.com"
 							/>
 							{errors.email && (
 								<p className={styles.error}>{errors.email}</p>
@@ -198,7 +219,6 @@ export default function Signup() {
 								required={true}
 								name="password"
 								type="password"
-								placeholder="password"
 							/>
 							{errors.password && (
 								<p className={styles.error}>
@@ -219,7 +239,6 @@ export default function Signup() {
 								required={true}
 								name="confirmPassword"
 								type="password"
-								placeholder="confirm password"
 							/>
 							{errors.password && (
 								<p className={styles.error}>
